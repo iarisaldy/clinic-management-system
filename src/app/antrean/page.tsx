@@ -244,13 +244,13 @@ export default function AntreanPage() {
               ) : (
                 <div className="divide-y divide-slate-100 dark:divide-slate-800">
                   {displayQueues.map((item) => (
-                    <div key={item.id} className="p-4 flex items-center justify-between hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
-                      <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-emerald-400 font-black text-xl flex items-center justify-center shadow-lg border border-slate-700">
+                    <div key={item.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-emerald-400 font-black text-lg sm:text-xl flex items-center justify-center shadow-lg border border-slate-700 shrink-0">
                           {item.queue_number}
                         </div>
                         <div>
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2 flex-wrap">
                             <h4 className="font-bold text-sm text-slate-900 dark:text-white">
                               {item.patient?.name}
                             </h4>
@@ -261,14 +261,15 @@ export default function AntreanPage() {
                           <p className="text-xs text-slate-500 mt-0.5">
                             Keluhan: <span className="font-medium text-slate-700 dark:text-slate-300">{item.complaint}</span>
                           </p>
-                          <p className="text-[11px] text-slate-400 mt-0.5">
+                          <p className="text-[11px] text-slate-400 mt-0.5 truncate">
                             NIK: {item.patient?.nik} • Phone: {item.patient?.phone}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex flex-col items-end gap-2">
+                      <div className="flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 pt-2 sm:pt-0 border-t sm:border-t-0 border-slate-100 dark:border-slate-800">
                         <Badge variant={item.status}>{item.status.toUpperCase()}</Badge>
+
 
                         {/* Action buttons based on status */}
                         <div className="flex items-center gap-1.5">

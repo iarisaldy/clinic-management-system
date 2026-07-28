@@ -226,10 +226,10 @@ function SuratContent() {
         </div>
 
         {/* Tab Switcher */}
-        <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700">
+        <div className="flex items-center p-1 bg-slate-100 dark:bg-slate-800 rounded-xl border border-slate-200/80 dark:border-slate-700 overflow-x-auto max-w-full shrink-0">
           <button
             onClick={() => setActiveTab('sehat')}
-            className={`px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-3 sm:px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'sehat'
                 ? 'bg-white dark:bg-slate-900 text-teal-700 dark:text-teal-300 shadow-sm border border-slate-200 dark:border-slate-700'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
@@ -239,7 +239,7 @@ function SuratContent() {
           </button>
           <button
             onClick={() => setActiveTab('rujukan')}
-            className={`px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-3 sm:px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'rujukan'
                 ? 'bg-white dark:bg-slate-900 text-blue-700 dark:text-blue-300 shadow-sm border border-slate-200 dark:border-slate-700'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
@@ -249,7 +249,7 @@ function SuratContent() {
           </button>
           <button
             onClick={() => setActiveTab('sakit')}
-            className={`px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-3 sm:px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'sakit'
                 ? 'bg-white dark:bg-slate-900 text-purple-700 dark:text-purple-300 shadow-sm border border-slate-200 dark:border-slate-700'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'
@@ -259,7 +259,7 @@ function SuratContent() {
           </button>
           <button
             onClick={() => setActiveTab('riwayat')}
-            className={`px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 ${
+            className={`px-3 sm:px-3.5 py-2 text-xs font-bold rounded-lg transition-all flex items-center gap-1.5 shrink-0 ${
               activeTab === 'riwayat'
                 ? 'bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm border border-slate-200 dark:border-slate-700'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-slate-200'

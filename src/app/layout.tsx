@@ -4,12 +4,13 @@ import './globals.css';
 import { ClinicProvider } from '@/lib/store/ClinicContext';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { MobileBottomNav } from '@/components/layout/MobileNav';
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Klinik Pratama Sehat - Sistem Informasi Praktik Dokter',
-  description: 'Aplikasi Light EMR & Sistem Informasi Manajemen Klinik Praktik Dokter Sederhana',
+  title: 'Praktik Dokter Mandiri - Light EMR & Sistem Surat Dokter',
+  description: 'Aplikasi EMR, Antrean, Rekam Medis & Cetak Surat Kesehatan/Rujukan RS Praktik Dokter Mandiri',
 };
 
 export default function RootLayout({
@@ -24,12 +25,14 @@ export default function RootLayout({
           <Navbar />
           <div className="flex flex-1">
             <Sidebar />
-            <main className="flex-1 p-4 sm:p-6 md:p-8 max-w-7xl mx-auto w-full">
+            <main className="flex-1 p-3.5 sm:p-6 md:p-8 max-w-7xl mx-auto w-full pb-20 lg:pb-8">
               {children}
             </main>
           </div>
+          <MobileBottomNav />
         </ClinicProvider>
       </body>
     </html>
   );
 }
+
