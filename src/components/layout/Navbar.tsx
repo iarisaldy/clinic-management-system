@@ -6,6 +6,7 @@ import { Stethoscope, Clock } from 'lucide-react';
 import { MobileHeaderToggle, MobileDrawer } from './MobileNav';
 
 export const Navbar: React.FC = () => {
+  const { doctorProfile } = useClinic();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
 
   const currentDate = new Date().toLocaleDateString('id-ID', {
@@ -28,10 +29,10 @@ export const Navbar: React.FC = () => {
           <div>
             <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
               <h1 className="font-extrabold text-sm sm:text-base tracking-tight text-slate-900 dark:text-white truncate">
-                Praktik Dokter Mandiri
+                {doctorProfile.clinic_name}
               </h1>
               <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider px-1.5 sm:px-2 py-0.5 rounded bg-teal-100 dark:bg-teal-950/60 text-teal-700 dark:text-teal-300 border border-teal-200 dark:border-teal-800">
-                dr. Hendra Pratama
+                {doctorProfile.name}
               </span>
             </div>
             <p className="text-xs text-slate-500 dark:text-slate-400 hidden md:block">

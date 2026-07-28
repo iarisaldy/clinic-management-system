@@ -16,7 +16,8 @@ import {
   FileCheck,
   Menu,
   X,
-  ChevronRight
+  ChevronRight,
+  Settings
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -40,7 +41,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
   onClose,
 }) => {
   const pathname = usePathname();
-  const { medicines, queues } = useClinic();
+  const { medicines, queues, doctorProfile } = useClinic();
 
   const lowStockCount = medicines.filter((m) => m.stock <= m.min_stock).length;
   const activeQueueCount = queues.filter((q) => q.status === 'menunggu' || q.status === 'pemeriksaan').length;
@@ -72,6 +73,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
     },
     { label: 'Tarif Layanan Dokter', href: '/master/tarif', icon: Activity },
     { label: 'Laporan & Rekap', href: '/laporan', icon: BarChart3 },
+    { label: 'Pengaturan Profil', href: '/settings', icon: Settings },
   ];
 
   return (
@@ -91,7 +93,7 @@ export const MobileDrawer: React.FC<{ isOpen: boolean; onClose: () => void }> = 
               DR
             </div>
             <div>
-              <p className="text-xs font-bold text-white">dr. Hendra Pratama</p>
+              <p className="text-xs font-bold text-white">{doctorProfile.name}</p>
               <p className="text-[10px] text-teal-400 font-medium">Dokter Praktik Mandiri</p>
             </div>
           </div>

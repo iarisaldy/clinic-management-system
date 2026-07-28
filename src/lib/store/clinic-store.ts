@@ -260,3 +260,15 @@ export const INITIAL_SICK_LEAVE_CERTIFICATES: SickLeaveCertificate[] = [
   },
 ];
 
+export const INITIAL_DOCTOR_PROFILE = {
+  name: 'dr. Hendra Pratama, Sp.PD',
+  title: 'Dokter Spesialis Penyakit Dalam',
+  sip: '449/123/SIP-DR/DISKES/2024',
+  str: '31.1.1.100.2.19.123456',
+  clinic_name: 'Praktik Dokter Mandiri',
+  address: 'Jl. R.E. Martadinata No. 88',
+  city: 'Bandung',
+  phone: '(022) 7201234 / 0812-3456-7890',
+};
+
+

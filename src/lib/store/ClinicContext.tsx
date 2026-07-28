@@ -14,7 +14,8 @@ import {
   PrescriptionItem,
   HealthCertificate,
   ReferralLetter,
-  SickLeaveCertificate
+  SickLeaveCertificate,
+  DoctorProfile
 } from '@/lib/types/clinic';
 import {
   INITIAL_PATIENTS,
@@ -25,7 +26,8 @@ import {
   INITIAL_INVOICES,
   INITIAL_HEALTH_CERTIFICATES,
   INITIAL_REFERRAL_LETTERS,
-  INITIAL_SICK_LEAVE_CERTIFICATES
+  INITIAL_SICK_LEAVE_CERTIFICATES,
+  INITIAL_DOCTOR_PROFILE
 } from './clinic-store';
 import { generateQueueNumber, generateInvoiceNumber } from '@/lib/utils';
 
@@ -41,9 +43,12 @@ interface ClinicContextType {
   healthCertificates: HealthCertificate[];
   referralLetters: ReferralLetter[];
   sickLeaveCertificates: SickLeaveCertificate[];
+  doctorProfile: DoctorProfile;
   
   // Actions
+  updateDoctorProfile: (data: Partial<DoctorProfile>) => void;
   addPatient: (data: Omit<Patient, 'id' | 'created_at'>) => Patient;
+
   updatePatient: (id: string, data: Partial<Patient>) => void;
   
   addQueue: (patientId: string, complaint?: string) => QueueItem;
@@ -99,6 +104,7 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [healthCertificates, setHealthCertificates] = useState<HealthCertificate[]>(INITIAL_HEALTH_CERTIFICATES);
   const [referralLetters, setReferralLetters] = useState<ReferralLetter[]>(INITIAL_REFERRAL_LETTERS);
   const [sickLeaveCertificates, setSickLeaveCertificates] = useState<SickLeaveCertificate[]>(INITIAL_SICK_LEAVE_CERTIFICATES);
+  const [doctorProfile, setDoctorProfile] = useState<DoctorProfile>(INITIAL_DOCTOR_PROFILE);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load state from localStorage on client side mount
@@ -116,6 +122,7 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         if (parsed.healthCertificates) setHealthCertificates(parsed.healthCertificates);
         if (parsed.referralLetters) setReferralLetters(parsed.referralLetters);
         if (parsed.sickLeaveCertificates) setSickLeaveCertificates(parsed.sickLeaveCertificates);
+        if (parsed.doctorProfile) setDoctorProfile(parsed.doctorProfile);
       }
     } catch (e) {
       console.error('Failed to load state from localStorage', e);
@@ -138,12 +145,18 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         healthCertificates,
         referralLetters,
         sickLeaveCertificates,
+        doctorProfile,
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
     } catch (e) {
       console.error('Failed to save state to localStorage', e);
     }
-  }, [patients, queues, medicines, services, medicalRecords, invoices, healthCertificates, referralLetters, sickLeaveCertificates, isLoaded]);
+  }, [patients, queues, medicines, services, medicalRecords, invoices, healthCertificates, referralLetters, sickLeaveCertificates, doctorProfile, isLoaded]);
+
+  const updateDoctorProfile = (data: Partial<DoctorProfile>) => {
+    setDoctorProfile((prev) => ({ ...prev, ...data }));
+  };
+
 
   // Actions
   const addPatient = (data: Omit<Patient, 'id' | 'created_at'>): Patient => {
@@ -410,6 +423,8 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         healthCertificates,
         referralLetters,
         sickLeaveCertificates,
+        doctorProfile,
+        updateDoctorProfile,
         addPatient,
         updatePatient,
         addQueue,

@@ -41,6 +41,7 @@ function SuratContent() {
     healthCertificates,
     referralLetters,
     sickLeaveCertificates,
+    doctorProfile,
     addHealthCertificate,
     addReferralLetter,
     addSickLeaveCertificate,
@@ -840,16 +841,16 @@ function SuratContent() {
               {/* KOP SURAT PRAKTIK DOKTER MANDIRI */}
               <div className="border-b-2 border-slate-900 pb-4 text-center">
                 <h2 className="text-lg font-black tracking-wide uppercase text-slate-900">
-                  PRAKTIK DOKTER MANDIRI
+                  {doctorProfile.clinic_name || 'PRAKTIK DOKTER MANDIRI'}
                 </h2>
                 <h3 className="text-base font-bold text-teal-800">
-                  dr. HENDRA PRATAMA, Sp.PD
+                  {doctorProfile.name}
                 </h3>
                 <p className="text-[11px] text-slate-600 mt-0.5">
-                  SIP No: 449/123/SIP-DR/DISKES/2024 • STR No: 31.1.1.100.2.19.123456
+                  SIP No: {doctorProfile.sip} • STR No: {doctorProfile.str}
                 </p>
                 <p className="text-[11px] text-slate-600">
-                  Alamat Praktik: Jl. R.E. Martadinata No. 88, Bandung • Telp: (022) 7201234 / 0812-3456-7890
+                  Alamat Praktik: {doctorProfile.address}, {doctorProfile.city} • Telp: {doctorProfile.phone}
                 </p>
               </div>
 
@@ -1046,13 +1047,13 @@ function SuratContent() {
 
                 <div className="text-center space-y-12">
                   <div>
-                    <p>Bandung, {formatTanggal(printData.data.created_at)}</p>
+                    <p>{doctorProfile.city}, {formatTanggal(printData.data.created_at)}</p>
                     <p className="font-semibold text-slate-800">Dokter Pemeriksa,</p>
                   </div>
 
                   <div>
-                    <p className="font-bold underline text-slate-900">dr. Hendra Pratama, Sp.PD</p>
-                    <p className="text-[10px] text-slate-500">SIP: 449/123/SIP-DR/DISKES/2024</p>
+                    <p className="font-bold underline text-slate-900">{doctorProfile.name}</p>
+                    <p className="text-[10px] text-slate-500">SIP: {doctorProfile.sip}</p>
                   </div>
                 </div>
               </div>

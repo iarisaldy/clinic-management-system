@@ -13,13 +13,14 @@ import {
   Activity,
   BarChart3,
   AlertTriangle,
-  FileCheck
+  FileCheck,
+  Settings
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export const Sidebar: React.FC = () => {
   const pathname = usePathname();
-  const { role, medicines, queues } = useClinic();
+  const { role, medicines, queues, doctorProfile } = useClinic();
 
   // Stock alert counter
   const lowStockCount = medicines.filter((m) => m.stock <= m.min_stock).length;
@@ -72,6 +73,11 @@ export const Sidebar: React.FC = () => {
       href: '/laporan',
       icon: BarChart3,
     },
+    {
+      label: 'Pengaturan Profil',
+      href: '/settings',
+      icon: Settings,
+    },
   ];
 
   return (
@@ -84,7 +90,7 @@ export const Sidebar: React.FC = () => {
           </div>
           <div className="overflow-hidden">
             <p className="text-xs font-semibold text-white truncate">
-              dr. Hendra Pratama
+              {doctorProfile.name}
             </p>
             <p className="text-[11px] text-teal-400 flex items-center gap-1 font-medium capitalize">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />

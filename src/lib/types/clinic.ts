@@ -145,3 +145,17 @@ export interface SickLeaveCertificate {
   created_at: string;
 }
 
+export interface DoctorProfile {
+  name: string; // e.g. "dr. Hendra Pratama, Sp.PD"
+  title: string; // e.g. "Dokter Spesialis Penyakit Dalam"
+  sip: string; // e.g. "449/123/SIP-DR/DISKES/2024"
+  str: string; // e.g. "31.1.1.100.2.19.123456"
+  clinic_name: string; // e.g. "Praktik Dokter Mandiri"
+  address: string; // e.g. "Jl. R.E. Martadinata No. 88"
+  city: string; // e.g. "Bandung"
+  phone: string; // e.g. "(022) 7201234 / 0812-3456-7890"
+  logo_url?: string;
+  signature_url?: string;
+}
+
+
