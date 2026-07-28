@@ -96,3 +96,52 @@ export interface Invoice {
   paid_at?: string;
   created_at: string;
 }
+
+export interface HealthCertificate {
+  id: string;
+  letter_number: string; // e.g. "001/SK-SEHAT/VII/2026"
+  patient_id: string;
+  patient?: Patient;
+  occupation: string;
+  purpose: string; // e.g. "Persyaratan Melamar Pekerjaan"
+  height: number; // cm
+  weight: number; // kg
+  blood_pressure: string; // e.g. "120/80 mmHg"
+  heart_rate?: number; // bpm
+  blood_type: string; // e.g. "A", "B", "AB", "O", "-"
+  color_blindness: 'Tidak' | 'Parsial' | 'Ya';
+  health_status: 'SEHAT' | 'TIDAK SEHAT';
+  doctor_notes?: string;
+  doctor_name: string;
+  created_at: string;
+}
+
+export interface ReferralLetter {
+  id: string;
+  letter_number: string; // e.g. "001/SR-RS/VII/2026"
+  patient_id: string;
+  patient?: Patient;
+  hospital_name: string; // e.g. "RSUD dr. Soetomo"
+  department_name: string; // e.g. "Poli Penyakit Dalam"
+  diagnosis: string; // e.g. "J00 - Acute Nasopharyngitis"
+  anamnesis_summary: string;
+  vital_signs_summary: string;
+  treatment_given: string;
+  referral_reason: string; // e.g. "Evaluasi Spesialis & Penanganan Lebih Lanjut"
+  doctor_name: string;
+  created_at: string;
+}
+
+export interface SickLeaveCertificate {
+  id: string;
+  letter_number: string; // e.g. "001/SK-SAKIT/VII/2026"
+  patient_id: string;
+  patient?: Patient;
+  leave_days: number;
+  start_date: string; // YYYY-MM-DD
+  end_date: string; // YYYY-MM-DD
+  diagnosis: string;
+  doctor_name: string;
+  created_at: string;
+}
+

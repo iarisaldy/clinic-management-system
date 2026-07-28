@@ -9,7 +9,10 @@ import {
   Invoice,
   UserRole,
   PaymentMethod,
-  QueueStatus
+  QueueStatus,
+  HealthCertificate,
+  ReferralLetter,
+  SickLeaveCertificate
 } from '@/lib/types/clinic';
 import { generateQueueNumber, generateInvoiceNumber } from '@/lib/utils';
 
@@ -202,3 +205,58 @@ export const INITIAL_RECORDS: MedicalRecord[] = [
 ];
 
 export const INITIAL_INVOICES: Invoice[] = [];
+
+export const INITIAL_HEALTH_CERTIFICATES: HealthCertificate[] = [
+  {
+    id: 'sk-1',
+    letter_number: '001/SK-SEHAT/VII/2026',
+    patient_id: 'p-1',
+    patient: INITIAL_PATIENTS[0],
+    occupation: 'Karyawan Swasta',
+    purpose: 'Syarat Melamar Pekerjaan BUMN',
+    height: 170,
+    weight: 65,
+    blood_pressure: '120/80 mmHg',
+    heart_rate: 78,
+    blood_type: 'O',
+    color_blindness: 'Tidak',
+    health_status: 'SEHAT',
+    doctor_notes: 'Kondisi fisik dan vital sign dalam batas normal.',
+    doctor_name: 'dr. Hendra Pratama',
+    created_at: '2026-07-25T10:00:00Z',
+  },
+];
+
+export const INITIAL_REFERRAL_LETTERS: ReferralLetter[] = [
+  {
+    id: 'sr-1',
+    letter_number: '001/SR-RS/VII/2026',
+    patient_id: 'p-3',
+    patient: INITIAL_PATIENTS[2],
+    hospital_name: 'RSUD dr. Hasan Sadikin Bandung',
+    department_name: 'Poli Penyakit Dalam (Sp.PD)',
+    diagnosis: 'E11 - Type 2 Diabetes Mellitus dengan Hyperglycemia',
+    anamnesis_summary: 'Pasien mengeluh sering haus, cepat lelah, GDS saat diperiksa 285 mg/dL.',
+    vital_signs_summary: 'TD: 135/85 mmHg, Nadi: 82x/mnt, Suhu: 36.6°C, BB: 72kg',
+    treatment_given: 'Edukasi diet rendah gula, Metformin 500mg 2x1',
+    referral_reason: 'Evaluasi spesialis penyakit dalam dan regulasi gula darah komprehensif.',
+    doctor_name: 'dr. Hendra Pratama',
+    created_at: '2026-07-26T11:30:00Z',
+  },
+];
+
+export const INITIAL_SICK_LEAVE_CERTIFICATES: SickLeaveCertificate[] = [
+  {
+    id: 'ss-1',
+    letter_number: '001/SK-SAKIT/VII/2026',
+    patient_id: 'p-2',
+    patient: INITIAL_PATIENTS[1],
+    leave_days: 3,
+    start_date: '2026-07-27',
+    end_date: '2026-07-29',
+    diagnosis: 'J00 - Acute Nasopharyngitis (Flu & Fever)',
+    doctor_name: 'dr. Hendra Pratama',
+    created_at: '2026-07-27T08:30:00Z',
+  },
+];
+

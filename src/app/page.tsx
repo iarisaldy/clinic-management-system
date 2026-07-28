@@ -18,7 +18,8 @@ import {
   ChevronRight,
   ArrowUpRight,
   CheckCircle2,
-  FileText
+  FileText,
+  FileCheck
 } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -45,42 +46,40 @@ export default function DashboardPage() {
     <div className="space-y-6">
       {/* Top Banner / Role Greeting */}
       <div className="bg-gradient-to-r from-slate-900 via-teal-950 to-slate-900 text-white rounded-2xl p-6 shadow-xl relative overflow-hidden border border-slate-800">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+        <div className="absolute top-0 right-0 w-96 h-96 bg-teal-500/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <span className="bg-emerald-500/20 text-emerald-300 text-xs font-semibold px-2.5 py-1 rounded-full border border-emerald-500/30">
-                Mode Active: {role === 'admin' ? 'Admin & Kasir' : 'Dokter Pemeriksa'}
+              <span className="bg-teal-500/20 text-teal-300 text-xs font-semibold px-2.5 py-1 rounded-full border border-teal-500/30">
+                Praktik Mandiri dr. Hendra Pratama, Sp.PD
               </span>
-              <span className="text-slate-400 text-xs">• Practical Light EMR</span>
+              <span className="text-slate-400 text-xs">• Solo Practice Suite</span>
             </div>
             <h2 className="text-2xl font-bold tracking-tight text-white">
-              Selamat Datang di Portal Klinik Pratama
+              Selamat Datang di System Praktik Dokter Mandiri
             </h2>
             <p className="text-sm text-slate-300 mt-1 max-w-xl">
-              Sistem informasi terpadu pendaftaran pasien, antrean harian, rekam medis elektronik, dan kalkulasi kasir otomatis.
+              Sistem ringkas membantu Dokter melayani pasien mandiri: pendaftaran, rekam medis (EMR), cetak surat kesehatan/rujukan RS, hingga kelola obat & tarif.
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            {role === 'admin' ? (
-              <Link href="/antrean">
-                <Button variant="primary" size="md">
-                  <UserPlus className="w-4 h-4" />
-                  Pendaftaran Pasien
-                </Button>
-              </Link>
-            ) : (
-              <Link href="/rekam-medis">
-                <Button variant="secondary" size="md">
-                  <Stethoscope className="w-4 h-4" />
-                  Buka Room Rekam Medis
-                </Button>
-              </Link>
-            )}
+            <Link href="/rekam-medis">
+              <Button variant="primary" size="md" className="bg-teal-600 hover:bg-teal-700">
+                <Stethoscope className="w-4 h-4" />
+                Buka Rekam Medis (EMR)
+              </Button>
+            </Link>
+            <Link href="/surat">
+              <Button variant="secondary" size="md">
+                <FileText className="w-4 h-4" />
+                Cetak Surat & Rujukan
+              </Button>
+            </Link>
           </div>
         </div>
       </div>
+
 
       {/* Metric Cards Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -296,6 +295,23 @@ export default function DashboardPage() {
                 </div>
               </Link>
 
+              <Link href="/surat" className="block">
+                <div className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-blue-500 hover:bg-blue-50/50 dark:hover:bg-blue-950/20 transition-all flex items-center justify-between group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-blue-100 dark:bg-blue-950 text-blue-700 dark:text-blue-300 flex items-center justify-center">
+                      <FileCheck className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-blue-600">
+                        Cetak Surat & Rujukan RS
+                      </h4>
+                      <p className="text-[11px] text-slate-500">Surat sehat, rujukan RS & surat sakit</p>
+                    </div>
+                  </div>
+                  <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-blue-600" />
+                </div>
+              </Link>
+
               <Link href="/kasir" className="block">
                 <div className="p-3 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-purple-500 hover:bg-purple-50/50 dark:hover:bg-purple-950/20 transition-all flex items-center justify-between group">
                   <div className="flex items-center gap-3">
@@ -304,7 +320,7 @@ export default function DashboardPage() {
                     </div>
                     <div>
                       <h4 className="text-xs font-bold text-slate-900 dark:text-white group-hover:text-purple-600">
-                        Kasir & Cetak Struk
+                        Kasir & Pembayaran
                       </h4>
                       <p className="text-[11px] text-slate-500">Hitung tagihan & cetak struk</p>
                     </div>
@@ -312,6 +328,7 @@ export default function DashboardPage() {
                   <ChevronRight className="w-4 h-4 text-slate-400 group-hover:text-purple-600" />
                 </div>
               </Link>
+
             </CardContent>
           </Card>
 

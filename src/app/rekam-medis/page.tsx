@@ -583,16 +583,45 @@ function RekamMedisContent() {
                     />
                   </div>
 
+                  {/* QUICK CERTIFICATE SHORTCUTS FOR ACTIVE PATIENT */}
+                  {activePatient && (
+                    <div className="p-3.5 bg-teal-50/60 dark:bg-teal-950/30 rounded-xl border border-teal-200 dark:border-teal-800 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+                      <div>
+                        <span className="font-bold text-teal-800 dark:text-teal-300">Cetak Surat Pasien Ini:</span>
+                        <p className="text-slate-500">Cetak Surat Sehat atau Surat Rujukan RS secara instant untuk {activePatient.name}.</p>
+                      </div>
+                      <div className="flex items-center gap-2 shrink-0">
+                        <a
+                          href={`/surat?patientId=${activePatient.id}&type=sehat`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-3 py-1.5 rounded-lg font-semibold bg-white dark:bg-slate-900 border border-teal-300 dark:border-teal-700 text-teal-700 dark:text-teal-300 hover:bg-teal-100 transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                        >
+                          📜 Surat Sehat
+                        </a>
+                        <a
+                          href={`/surat?patientId=${activePatient.id}&type=rujukan`}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="px-3 py-1.5 rounded-lg font-semibold bg-white dark:bg-slate-900 border border-blue-300 dark:border-blue-700 text-blue-700 dark:text-blue-300 hover:bg-blue-100 transition-colors inline-flex items-center gap-1.5 shadow-sm"
+                        >
+                          🏥 Rujukan RS
+                        </a>
+                      </div>
+                    </div>
+                  )}
+
                   {/* SUBMIT BUTTON */}
-                  <div className="pt-4 flex items-center justify-between border-t border-slate-100 dark:border-slate-800">
+                  <div className="pt-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-t border-slate-100 dark:border-slate-800">
                     <div className="text-xs text-slate-500">
-                      Status antrean otomatis berubah menjadi <span className="font-bold text-purple-600">KASIR</span>.
+                      Status antrean otomatis diperbarui ke <span className="font-bold text-teal-600">KASIR / SELESAI</span>.
                     </div>
 
                     <Button variant="primary" size="lg" type="submit">
-                      <Save className="w-5 h-5" /> Simpan EMR & Send to Kasir
+                      <Save className="w-5 h-5" /> Simpan EMR Pasien
                     </Button>
                   </div>
+
                 </form>
               </CardContent>
             </Card>

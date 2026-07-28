@@ -11,7 +11,10 @@ import {
   Invoice,
   QueueStatus,
   PaymentMethod,
-  PrescriptionItem
+  PrescriptionItem,
+  HealthCertificate,
+  ReferralLetter,
+  SickLeaveCertificate
 } from '@/lib/types/clinic';
 import {
   INITIAL_PATIENTS,
@@ -19,7 +22,10 @@ import {
   INITIAL_SERVICES,
   INITIAL_QUEUES,
   INITIAL_RECORDS,
-  INITIAL_INVOICES
+  INITIAL_INVOICES,
+  INITIAL_HEALTH_CERTIFICATES,
+  INITIAL_REFERRAL_LETTERS,
+  INITIAL_SICK_LEAVE_CERTIFICATES
 } from './clinic-store';
 import { generateQueueNumber, generateInvoiceNumber } from '@/lib/utils';
 
@@ -32,6 +38,9 @@ interface ClinicContextType {
   services: MedicalService[];
   medicalRecords: MedicalRecord[];
   invoices: Invoice[];
+  healthCertificates: HealthCertificate[];
+  referralLetters: ReferralLetter[];
+  sickLeaveCertificates: SickLeaveCertificate[];
   
   // Actions
   addPatient: (data: Omit<Patient, 'id' | 'created_at'>) => Patient;
@@ -59,6 +68,11 @@ interface ClinicContextType {
   
   payInvoice: (invoiceId: string, method: PaymentMethod, paidAmount: number) => Invoice | null;
   
+  // Certificates Actions
+  addHealthCertificate: (data: Omit<HealthCertificate, 'id' | 'created_at'>) => HealthCertificate;
+  addReferralLetter: (data: Omit<ReferralLetter, 'id' | 'created_at'>) => ReferralLetter;
+  addSickLeaveCertificate: (data: Omit<SickLeaveCertificate, 'id' | 'created_at'>) => SickLeaveCertificate;
+
   // Master Data Obat
   addMedicine: (data: Omit<Medicine, 'id' | 'created_at'>) => Medicine;
   updateMedicine: (id: string, data: Partial<Medicine>) => void;
@@ -72,16 +86,19 @@ interface ClinicContextType {
 
 const ClinicContext = createContext<ClinicContextType | undefined>(undefined);
 
-const LOCAL_STORAGE_KEY = 'clinic_emr_state_v1';
+const LOCAL_STORAGE_KEY = 'clinic_emr_state_v2';
 
 export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [role, setRole] = useState<UserRole>('admin');
+  const [role, setRole] = useState<UserRole>('dokter');
   const [patients, setPatients] = useState<Patient[]>(INITIAL_PATIENTS);
   const [queues, setQueues] = useState<QueueItem[]>(INITIAL_QUEUES);
   const [medicines, setMedicines] = useState<Medicine[]>(INITIAL_MEDICINES);
   const [services, setServices] = useState<MedicalService[]>(INITIAL_SERVICES);
   const [medicalRecords, setMedicalRecords] = useState<MedicalRecord[]>(INITIAL_RECORDS);
   const [invoices, setInvoices] = useState<Invoice[]>(INITIAL_INVOICES);
+  const [healthCertificates, setHealthCertificates] = useState<HealthCertificate[]>(INITIAL_HEALTH_CERTIFICATES);
+  const [referralLetters, setReferralLetters] = useState<ReferralLetter[]>(INITIAL_REFERRAL_LETTERS);
+  const [sickLeaveCertificates, setSickLeaveCertificates] = useState<SickLeaveCertificate[]>(INITIAL_SICK_LEAVE_CERTIFICATES);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // Load state from localStorage on client side mount
@@ -96,6 +113,9 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         if (parsed.services) setServices(parsed.services);
         if (parsed.medicalRecords) setMedicalRecords(parsed.medicalRecords);
         if (parsed.invoices) setInvoices(parsed.invoices);
+        if (parsed.healthCertificates) setHealthCertificates(parsed.healthCertificates);
+        if (parsed.referralLetters) setReferralLetters(parsed.referralLetters);
+        if (parsed.sickLeaveCertificates) setSickLeaveCertificates(parsed.sickLeaveCertificates);
       }
     } catch (e) {
       console.error('Failed to load state from localStorage', e);
@@ -115,12 +135,15 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         services,
         medicalRecords,
         invoices,
+        healthCertificates,
+        referralLetters,
+        sickLeaveCertificates,
       };
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(stateToSave));
     } catch (e) {
       console.error('Failed to save state to localStorage', e);
     }
-  }, [patients, queues, medicines, services, medicalRecords, invoices, isLoaded]);
+  }, [patients, queues, medicines, services, medicalRecords, invoices, healthCertificates, referralLetters, sickLeaveCertificates, isLoaded]);
 
   // Actions
   const addPatient = (data: Omit<Patient, 'id' | 'created_at'>): Patient => {
@@ -294,6 +317,43 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
     return updatedInvoice;
   };
 
+  // Certificates Actions Implementation
+  const addHealthCertificate = (data: Omit<HealthCertificate, 'id' | 'created_at'>): HealthCertificate => {
+    const patientObj = patients.find((p) => p.id === data.patient_id);
+    const newCert: HealthCertificate = {
+      ...data,
+      patient: patientObj,
+      id: `sk-${Date.now()}`,
+      created_at: new Date().toISOString(),
+    };
+    setHealthCertificates((prev) => [newCert, ...prev]);
+    return newCert;
+  };
+
+  const addReferralLetter = (data: Omit<ReferralLetter, 'id' | 'created_at'>): ReferralLetter => {
+    const patientObj = patients.find((p) => p.id === data.patient_id);
+    const newRef: ReferralLetter = {
+      ...data,
+      patient: patientObj,
+      id: `sr-${Date.now()}`,
+      created_at: new Date().toISOString(),
+    };
+    setReferralLetters((prev) => [newRef, ...prev]);
+    return newRef;
+  };
+
+  const addSickLeaveCertificate = (data: Omit<SickLeaveCertificate, 'id' | 'created_at'>): SickLeaveCertificate => {
+    const patientObj = patients.find((p) => p.id === data.patient_id);
+    const newSick: SickLeaveCertificate = {
+      ...data,
+      patient: patientObj,
+      id: `ss-${Date.now()}`,
+      created_at: new Date().toISOString(),
+    };
+    setSickLeaveCertificates((prev) => [newSick, ...prev]);
+    return newSick;
+  };
+
   // Master Data Obat CRUD
   const addMedicine = (data: Omit<Medicine, 'id' | 'created_at'>): Medicine => {
     const newMed: Medicine = {
@@ -347,12 +407,18 @@ export const ClinicProvider: React.FC<{ children: React.ReactNode }> = ({ childr
         services,
         medicalRecords,
         invoices,
+        healthCertificates,
+        referralLetters,
+        sickLeaveCertificates,
         addPatient,
         updatePatient,
         addQueue,
         updateQueueStatus,
         saveMedicalRecord,
         payInvoice,
+        addHealthCertificate,
+        addReferralLetter,
+        addSickLeaveCertificate,
         addMedicine,
         updateMedicine,
         deleteMedicine,
@@ -373,3 +439,4 @@ export const useClinic = () => {
   }
   return context;
 };
+

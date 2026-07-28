@@ -12,7 +12,8 @@ import {
   Pill,
   Activity,
   BarChart3,
-  AlertTriangle
+  AlertTriangle,
+  FileCheck
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
@@ -30,7 +31,6 @@ export const Sidebar: React.FC = () => {
       label: 'Dashboard Overview',
       href: '/',
       icon: LayoutDashboard,
-      roles: ['admin', 'dokter'],
     },
     {
       label: 'Pendaftaran & Antrean',
@@ -38,20 +38,22 @@ export const Sidebar: React.FC = () => {
       icon: Users,
       badge: activeQueueCount > 0 ? activeQueueCount : undefined,
       badgeColor: 'bg-emerald-500 text-white',
-      roles: ['admin'],
     },
     {
       label: 'Rekam Medis (EMR)',
       href: '/rekam-medis',
       icon: FileText,
-      highlight: role === 'dokter',
-      roles: ['dokter', 'admin'],
+    },
+    {
+      label: 'Cetak Surat & Rujukan',
+      href: '/surat',
+      icon: FileCheck,
+      badgeColor: 'bg-teal-500 text-white',
     },
     {
       label: 'Kasir & Pembayaran',
       href: '/kasir',
       icon: CreditCard,
-      roles: ['admin'],
     },
     {
       label: 'Master Data Obat',
@@ -59,19 +61,16 @@ export const Sidebar: React.FC = () => {
       icon: Pill,
       badge: lowStockCount > 0 ? lowStockCount : undefined,
       badgeColor: 'bg-rose-500 text-white',
-      roles: ['admin'],
     },
     {
-      label: 'Tarif Tindakan',
+      label: 'Tarif Layanan Dokter',
       href: '/master/tarif',
       icon: Activity,
-      roles: ['admin'],
     },
     {
       label: 'Laporan & Rekap',
       href: '/laporan',
       icon: BarChart3,
-      roles: ['admin', 'dokter'],
     },
   ];
 
@@ -80,16 +79,16 @@ export const Sidebar: React.FC = () => {
       {/* User Status Card */}
       <div className="p-4 border-b border-slate-800/80">
         <div className="bg-slate-800/60 p-3 rounded-xl border border-slate-700/50 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-emerald-600/20 text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30">
-            {role === 'admin' ? 'ADM' : 'DR'}
+          <div className="w-9 h-9 rounded-full bg-teal-600/20 text-teal-400 flex items-center justify-center font-bold text-sm border border-teal-500/30">
+            DR
           </div>
           <div className="overflow-hidden">
             <p className="text-xs font-semibold text-white truncate">
-              {role === 'admin' ? 'Petugas Kasir / Admin' : 'dr. Hendra Pratama'}
+              dr. Hendra Pratama
             </p>
-            <p className="text-[11px] text-emerald-400 flex items-center gap-1 font-medium capitalize">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              Mode {role} Active
+            <p className="text-[11px] text-teal-400 flex items-center gap-1 font-medium capitalize">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-400 animate-pulse" />
+              Dokter Praktik Mandiri
             </p>
           </div>
         </div>
@@ -98,11 +97,10 @@ export const Sidebar: React.FC = () => {
       {/* Navigation Links */}
       <div className="p-3 space-y-1 flex-1">
         <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-wider text-slate-500">
-          Menu Navigasi
+          Menu Utama Praktik
         </div>
         {navItems.map((item) => {
           const isActive = pathname === item.href;
-          const isRolePrimary = item.roles.includes(role);
           const Icon = item.icon;
 
           return (
@@ -112,10 +110,8 @@ export const Sidebar: React.FC = () => {
               className={cn(
                 'flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all group',
                 isActive
-                  ? 'bg-emerald-600 text-white font-semibold shadow-lg shadow-emerald-950/40'
-                  : isRolePrimary
-                  ? 'hover:bg-slate-800/80 text-slate-300 hover:text-white'
-                  : 'opacity-60 hover:opacity-100 hover:bg-slate-800/40 text-slate-400'
+                  ? 'bg-teal-600 text-white font-semibold shadow-lg shadow-teal-950/40'
+                  : 'hover:bg-slate-800/80 text-slate-300 hover:text-white'
               )}
             >
               <div className="flex items-center gap-3">
@@ -148,14 +144,30 @@ export const Sidebar: React.FC = () => {
           <div className="flex items-start gap-2 text-rose-300">
             <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5 text-rose-400" />
             <div>
-              <p className="text-xs font-semibold">Peringatan Stok!</p>
+              <p className="text-xs font-semibold">Peringatan Stok Obat!</p>
               <p className="text-[11px] text-rose-300/80 mt-0.5">
-                Ada {lowStockCount} obat mendekati/dibawah batas minimal stok.
+                Ada {lowStockCount} jenis obat di bawah stok minimal.
               </p>
             </div>
           </div>
         </div>
       )}
+
+      {/* Developer License & Credit Footer */}
+      <div className="p-3 mx-3 mb-3 bg-slate-800/40 border border-slate-800 rounded-xl text-center">
+        <p className="text-[10px] text-slate-400 font-semibold">
+          © 2026 Designed & Developed by
+        </p>
+        <p className="text-xs font-bold text-teal-400 mt-0.5">
+          Muhammad Irfan
+        </p>
+        <p className="text-[9px] text-slate-500 mt-0.5">
+          Praktik Dokter Mandiri Suite v1.0
+        </p>
+      </div>
     </aside>
   );
 };
+
+
+

@@ -1,85 +1,66 @@
-# 🏥 Clinic Management System (Sistem Manajemen Klinik)
+# 🏥 Sistem Informasi Praktik Dokter Mandiri & EMR
 
 [![Next.js](https://img.shields.io/badge/Next.js-16-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![Supabase](https://img.shields.io/badge/Supabase-Database-emerald?style=flat-square&logo=supabase)](https://supabase.com/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?style=flat-square&logo=tailwindcss)](https://tailwindcss.com/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
+[![Developer](https://img.shields.io/badge/Developed_by-Muhammad_Irfan-teal?style=flat-square)](https://github.com/iarisaldy)
 
-Sistem Manajemen Klinik & Rekam Medis Elektronik (EMR) berbasis web modern yang responsif, cepat, dan terintegrasi untuk pengelolaan operasional klinik secara efisien.
+Sistem Informasi Manajemen Klinik, EMR (Rekam Medis Elektronik), dan Pencetakan Surat Dokter ringkas berbasis web modern yang didesain khusus untuk **Dokter Praktik Mandiri** (Solo Practitioner).
 
 ---
 
-## ✨ Fitur Utama
+## ✨ Fitur Utama Sistem
 
-- **📊 Dashboard Operational Real-Time**
-  - Ringkasan status antrean hari ini (Menunggu, Pemeriksaan, Kasir, Selesai).
-  - Indikator pendapatan harian & statistik pasien.
-  - Peringatan stok obat menipis (Low stock alert).
+- **🩺 Solo Practice EMR Suite (Rekam Medis Dokter)**
+  - Penginputan riwayat medis pasien ringkas: Tanda Vital (TTV), Anamnesis, Diagnosis ICD-10, serta Resep Obat Dinamis.
+  - Alur pelayanan tunggal serbaguna dari pendaftaran s/d pembayaran tanpa batas role yang rumit.
 
-- **🎫 Manajemen Antrean (Queue Management)**
-  - Pendaftaran antrean pasien baru atau terdaftar.
-  - Pemanggilan & pembaruan status antrean secara real-time.
-  - Alur antrean dari Pendaftaran → Dokter → Kasir.
+- **📜 Modul Cetak Surat Kesehatan & Rujukan RS (Print-Ready)**
+  - **Surat Keterangan Sehat**: Auto-fill dari EMR (TB, BB, Tekanan Darah, Golongan Darah, Buta Warna, Keperluan Surat & Status Sehat).
+  - **Surat Rujukan Ke Rumah Sakit**: Penentuan RS Tujuan, Poli Spesialis, Anamnesis Ringkas, Diagnosis Kerja & Alasan Rujukan Medis.
+  - **Surat Keterangan Sakit / Istirahat**: Jumlah hari istirahat, tanggal mulai/selesai & diagnosis.
+  - **Kop Surat Resmi Dokter Praktik**: Format siap cetak browser (`window.print()`) dengan signature & stamp block.
 
-- **🩺 Rekam Medis Elektronik (EMR)**
-  - Penginputan riwayat medis pasien oleh Dokter.
-  - Pencatatan keluhan, anamnesis, diagnosis, tindakan medis, serta resep obat.
+- **🎫 Antrean Pasien & Pendaftaran Instant**
+  - Pendaftaran antrean harian dan pemanggilan pasien.
 
-- **💳 Kasir & Pembayaran (Billing & Cashier)**
-  - Kalkulasi otomatis total biaya konsultasi, tindakan medis, dan resep obat.
-  - Penerbitan kuitansi & invoice pembayaran.
+- **💳 Kasir & Kalkulasi Tagihan Otomatis**
+  - Kalkulasi otomatis total biaya konsultasi, obat, dan tindakan medis + pencetakan kuitansi.
 
-- **📈 Laporan & Analisis Data**
-  - Laporan pendapatan bulanan & harian.
-  - Laporan kunjungan pasien & rekapitulasi obat.
-
-- **🗂️ Master Data Management**
-  - Pengelolaan Data Pasien, Dokter, Stok Obat & Alkes, serta Tarif Layanan Klinik.
+- **📦 Kelola Obat & Tarif Layanan**
+  - Master data stok obat dengan alert stok menipis (low stock alert) dan penyesuaian tarif dokter.
 
 ---
 
 ## 🛠️ Stack Teknologi
 
-- **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
-- **Database & Auth**: [Supabase PostgreSQL](https://supabase.com/)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Icons**: [Lucide React](https://lucide.dev/)
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4 + Lucide Icons
+- **Deployment**: Vercel Ready
 
 ---
 
-## 🚀 Panduan Memulai (Getting Started)
+## 🚀 Panduan Deployment Ke Vercel
 
-### Prasyarat
-- [Node.js](https://nodejs.org/) v18+ atau versi lebih baru
-- Akun [Supabase](https://supabase.com/)
-
-### 1. Clone Repository
+### Langkah 1: Push Perubahan ke GitHub
 ```bash
-git clone https://github.com/iarisaldy/clinic-management-system.git
-cd clinic-management-system
+git add .
+git commit -m "feat: Add Solo Practice Doctor workflow & Surat module (by Muhammad Irfan)"
+git push origin main
 ```
 
-### 2. Install Dependensi
-```bash
-npm install
-```
-
-### 3. Konfigurasi Environment Variables
-Buat file `.env.local` pada root project dan sesuaikan konfigurasi kredensial Supabase:
-```env
-NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
-```
-
-### 4. Jalankan Development Server
-```bash
-npm run dev
-```
-Buka [http://localhost:3000](http://localhost:3000) di browser untuk melihat hasilnya.
+### Langkah 2: Deploy di Vercel
+1. Buka [https://vercel.com/new](https://vercel.com/new) dan login dengan akun Vercel Anda.
+2. Pilih repositori **`clinic-management-system`** dari daftar repositori GitHub Anda.
+3. Pada halaman konfigurasi project:
+   - **Framework Preset**: Next.js
+   - **Root Directory**: `./`
+4. Klik **Deploy**. Vercel akan otomatis melakukan kompilasi dan menerbitkan link URL domain website aktif (misal `clinic-management-system.vercel.app`).
 
 ---
 
-## 📄 Lisensi
+## 📄 Lisensi & Hak Cipta
 
-Proyek ini menggunakan lisensi MIT.
+Copyright © 2026 **Muhammad Irfan**. All Rights Reserved.  
+Sistem ini dirancang & dikembangkan oleh **Muhammad Irfan**.
