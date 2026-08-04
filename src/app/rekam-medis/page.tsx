@@ -26,7 +26,9 @@ import {
   Heart,
   Calendar,
   Phone,
-  MapPin
+  MapPin,
+  Sparkles,
+  RefreshCw
 } from 'lucide-react';
 
 function RekamMedisContent() {
@@ -85,6 +87,41 @@ function RekamMedisContent() {
   const [selectedMedId, setSelectedMedId] = useState('');
   const [medQty, setMedQty] = useState(1);
   const [medInstruction, setMedInstruction] = useState('3x1 Sesudah Makan');
+  const [aiLoading, setAiLoading] = useState(false);
+
+  const handleAISuggest = async () => {
+    if (!anamnesis.trim()) {
+      alert('Mohon isi Anamnesis / Keluhan Pasien terlebih dahulu.');
+      return;
+    }
+    setAiLoading(true);
+    try {
+      const res = await fetch('/api/ai/assistant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'icd10_suggest',
+          prompt: anamnesis,
+          patientContext: {
+            anamnesis,
+            gender: activePatient?.gender,
+          },
+        }),
+      });
+      const data = await res.json();
+      if (data.reply) {
+        // Extract ICD-10 line or set main diagnosis
+        const lines = data.reply.split('\n');
+        const firstIcdLine = lines.find((l: string) => l.includes('1.') || l.includes('ICD')) || lines[0];
+        const cleanIcd = firstIcdLine.replace(/^\d+\.\s*\*\*/, '').replace(/\*\*/g, '').trim();
+        setDiagnosis(cleanIcd || 'J00 - Acute Nasopharyngitis');
+      }
+    } catch (e) {
+      alert('Gagal mendapatkan rekomendasi AI.');
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   // Set initial anamnesis from queue complaint when selectedQueueId changes
   useEffect(() => {
@@ -422,8 +459,26 @@ function RekamMedisContent() {
                     </div>
 
                     <div className="space-y-1.5">
+                      <div className="flex items-center justify-between">
+                        <label className="block text-xs font-semibold text-slate-700 dark:text-slate-300">
+                          Diagnosis (ICD-10 / Text Free)
+                        </label>
+                        <button
+                          type="button"
+                          onClick={handleAISuggest}
+                          disabled={aiLoading}
+                          className="flex items-center gap-1.5 px-2.5 py-1 text-xs font-bold text-teal-700 dark:text-teal-300 bg-teal-50 dark:bg-teal-950/60 border border-teal-300 dark:border-teal-700 hover:bg-teal-100 rounded-lg transition-colors shadow-sm"
+                        >
+                          {aiLoading ? (
+                            <RefreshCw className="w-3.5 h-3.5 animate-spin" />
+                          ) : (
+                            <Sparkles className="w-3.5 h-3.5 text-teal-500" />
+                          )}
+                          <span>✨ AI Suggest ICD-10</span>
+                        </button>
+                      </div>
+
                       <Input
-                        label="Diagnosis (ICD-10 / Text Free)"
                         placeholder="Contoh: J00 - Acute Nasopharyngitis"
                         required
                         value={diagnosis}

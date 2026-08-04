@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useClinic } from '@/lib/store/ClinicContext';
 import { Stethoscope, Clock } from 'lucide-react';
 import { MobileHeaderToggle, MobileDrawer } from './MobileNav';
+import { DemoSeederButton } from '@/components/ui/DemoSeederButton';
 
 export const Navbar: React.FC = () => {
   const { doctorProfile } = useClinic();
@@ -43,6 +44,9 @@ export const Navbar: React.FC = () => {
 
         {/* Right Controls & Date Display */}
         <div className="flex items-center gap-2 sm:gap-3">
+          {/* Demo Data Seeder Button */}
+          <DemoSeederButton />
+
           {/* Date Display */}
           <div className="hidden md:flex items-center gap-1.5 text-xs text-slate-600 dark:text-slate-300 bg-slate-100 dark:bg-slate-800 px-3.5 py-1.5 rounded-xl border border-slate-200/80 dark:border-slate-700">
             <Clock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />

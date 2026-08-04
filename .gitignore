@@ -29,3 +29,8 @@ next-env.d.ts
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# playwright
+/playwright-report/
+/test-results/
+

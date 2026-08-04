@@ -5,6 +5,7 @@ import { ClinicProvider } from '@/lib/store/ClinicContext';
 import { Navbar } from '@/components/layout/Navbar';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { MobileBottomNav } from '@/components/layout/MobileNav';
+import { AIChatDrawer } from '@/components/ai/AIChatDrawer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -30,6 +31,7 @@ export default function RootLayout({
             </main>
           </div>
           <MobileBottomNav />
+          <AIChatDrawer />
         </ClinicProvider>
       </body>
     </html>
