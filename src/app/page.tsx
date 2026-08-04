@@ -207,7 +207,7 @@ export default function DashboardPage() {
                     className="p-4 flex items-center justify-between hover:bg-slate-50/80 dark:hover:bg-slate-800/40 transition-colors"
                   >
                     <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-xl bg-slate-900 text-white font-extrabold text-base flex items-center justify-center shadow-md">
+                      <div className="min-w-[4rem] h-12 px-3 rounded-xl bg-slate-900 text-emerald-400 font-extrabold text-sm sm:text-base flex items-center justify-center shadow-md whitespace-nowrap shrink-0 tracking-wide">
                         {item.queue_number}
                       </div>
                       <div>

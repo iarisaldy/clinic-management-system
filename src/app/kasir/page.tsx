@@ -165,7 +165,7 @@ function KasirContent() {
                   </div>
                   <div className="text-right">
                     <span className="text-[10px] uppercase font-bold text-slate-400">Nomor Antrean</span>
-                    <p className="font-extrabold text-lg text-emerald-600">{activeQueue.queue_number}</p>
+                    <p className="font-extrabold text-lg text-emerald-600 whitespace-nowrap">{activeQueue.queue_number}</p>
                   </div>
                 </div>
 

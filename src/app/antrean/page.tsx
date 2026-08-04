@@ -246,7 +246,7 @@ export default function AntreanPage() {
                   {displayQueues.map((item) => (
                     <div key={item.id} className="p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 hover:bg-slate-50/80 dark:hover:bg-slate-800/40">
                       <div className="flex items-center gap-3 sm:gap-4">
-                        <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-emerald-400 font-black text-lg sm:text-xl flex items-center justify-center shadow-lg border border-slate-700 shrink-0">
+                        <div className="min-w-[4.5rem] h-12 sm:h-14 px-3 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-800 text-emerald-400 font-black text-base sm:text-lg flex items-center justify-center shadow-lg border border-slate-700 shrink-0 whitespace-nowrap tracking-wide">
                           {item.queue_number}
                         </div>
                         <div>
