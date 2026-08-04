@@ -1,6 +1,6 @@
 # 📖 Panduan Pengguna (User Manual)
 
-## Sistem Informasi Praktik Dokter Mandiri & EMR
+## Sistem Informasi Praktik Dokter Mandiri, EMR & AI Copilot
 
 - **Pengembang**: **Muhammad Irfan**  
 - **Peruntukan**: Dokter Praktik Mandiri (Solo Practitioners)  
@@ -8,17 +8,19 @@
 
 ---
 
-Selamat datang di **Sistem Informasi Praktik Dokter Mandiri**. Aplikasi ini dirancang khusus untuk membantu Anda mengelola pendaftaran pasien, rekam medis (EMR), penerbitan Surat Sehat & Rujukan RS, serta kuitansi pembayaran secara mandiri, cepat, dan 100% responsif dari laptop, tablet, maupun HP Anda.
+Selamat datang di **Sistem Informasi Praktik Dokter Mandiri**. Aplikasi ini dirancang khusus untuk membantu Anda mengelola pendaftaran pasien, rekam medis (EMR), rekomendasi AI ICD-10, penerbitan Surat Sehat & Rujukan RS, serta kuitansi pembayaran secara mandiri, cepat, dan 100% responsif dari laptop, tablet, maupun HP Anda.
 
 ---
 
 ## 📑 Daftar Isi Panduan
 1. [Langkah 1: Pengaturan Profil Dokter & Kop Surat (`/settings`)](#langkah-1-pengaturan-profil-dokter--kop-surat-settings)
 2. [Langkah 2: Pendaftaran Pasien & Ambil Antrean (`/antrean`)](#langkah-2-pendaftaran-pasien--ambil-antrean-antrean)
-3. [Langkah 3: Mengisi Rekam Medis (EMR) & Resep Obat (`/rekam-medis`)](#langkah-3-mengisi-rekam-medis-emr--resep-obat-rekam-medis)
-4. [Langkah 4: Mencetak Surat Kesehatan & Rujukan RS (`/surat`)](#langkah-4-mencetak-surat-kesehatan--rujukan-rs-surat)
-5. [Langkah 5: Memproses Pembayaran Kasir & Struk (`/kasir`)](#langkah-5-memproses-pembayaran-kasir--struk-kasir)
-6. [Langkah 6: Mengelola Data Obat & Tarif Dokter (`/master`)](#langkah-6-mengelola-data-obat--tarif-dokter-master)
+3. [Langkah 3: Mengisi Rekam Medis (EMR) & Bantuan AI (`/rekam-medis`)](#langkah-3-mengisi-rekam-medis-emr--bantuan-ai-rekam-medis)
+4. [Langkah 4: Menggunakan MedAssistant AI Chatbot (Widget Kanan Bawah)](#langkah-4-menggunakan-medassistant-ai-chatbot-widget-kanan-bawah)
+5. [Langkah 5: Mencetak Surat Kesehatan & Rujukan RS (`/surat`)](#langkah-5-mencetak-surat-kesehatan--rujukan-rs-surat)
+6. [Langkah 6: Memproses Pembayaran Kasir & Struk (`/kasir`)](#langkah-6-memproses-pembayaran-kasir--struk-kasir)
+7. [Langkah 7: Mengelola Data Obat & Tarif Dokter (`/master`)](#langkah-7-mengelola-data-obat--tarif-dokter-master)
+8. [Langkah 8: Menggunakan Tombol ⚡ Reset Demo Data](#langkah-8-menggunakan-tombol--reset-demo-data)
 
 ---
 
@@ -56,23 +58,37 @@ Sebelum mulai melayani pasien, disarankan untuk melengkapi identitas praktik And
 
 ---
 
-### 🩺 Langkah 3: Mengisi Rekam Medis (EMR) & Resep Obat (`/rekam-medis`)
+### 🩺 Langkah 3: Mengisi Rekam Medis (EMR) & Bantuan AI (`/rekam-medis`)
 
 1. Buka menu **Rekam Medis (EMR)** (`/rekam-medis`).
 2. Pilih antrean pasien yang akan diperiksa pada dropdown **Antrean Pasien**.
 3. Isi **Tanda-Tanda Vital (TTV)**: Systolic, Diastolic, Suhu (°C), Berat (kg), Tinggi (cm), Nadi (bpm).
-4. Catat **Anamnesis** dan **Diagnosis ICD-10** (Anda dapat mengklik rekomendasi *Quick Diagnosis Tags* untuk pengisian cepat).
-5. Input **Resep Obat Dinamis**:
+4. Catat **Anamnesis** / Keluhan Utama Pasien.
+5. **✨ Menggunakan Fitur AI Suggest ICD-10**:
+   - Klik tombol **`✨ AI Suggest ICD-10`** di samping label Diagnosis.
+   - AI akan secara otomatis menganalisis anamnesis dan mengisikan kode diagnosis ICD-10 serta saran resep obat.
+6. Input **Resep Obat Dinamis**:
    - Pilih obat dari daftar master obat.
    - Isi jumlah (Qty) dan aturan pakai (misal: *3x1 Sesudah Makan*).
    - Klik **+ Tambah**.
-6. (Opsional) Pilih **Tindakan Tambahan** dan tulis **Catatan Dokter**.
-7. Jika pasien membutuhkan Surat Sehat atau Rujukan RS, Anda dapat mengklik tombol shortcut **📜 Surat Sehat** atau **🏥 Rujukan RS** di bagian bawah form.
-8. Klik **Simpan EMR Pasien**.
+7. (Opsional) Pilih **Tindakan Tambahan** dan tulis **Catatan Dokter**.
+8. Jika pasien membutuhkan Surat Sehat atau Rujukan RS, Anda dapat mengklik tombol shortcut **📜 Surat Sehat** atau **🏥 Rujukan RS** di bagian bawah form.
+9. Klik **Simpan EMR Pasien**.
 
 ---
 
-### 📜 Langkah 4: Mencetak Surat Kesehatan & Rujukan RS (`/surat`)
+### 💬 Langkah 4: Menggunakan MedAssistant AI Chatbot (Widget Kanan Bawah)
+
+1. Klik tombol melayang **`MedAssistant AI`** di pojok kanan bawah layar.
+2. Anda dapat mengetik pertanyaan medis bebas atau menggunakan **Quick Action Pills**:
+   - 🤒 *Demam & ICD-10*
+   - 💊 *Resep Gastritis*
+   - 🫁 *ISPA & Batuk*
+3. AI akan memberikan jawaban akurat terstruktur mengenai diagnosis ICD-10, saran dosis obat, atau triase gejala pasien.
+
+---
+
+### 📜 Langkah 5: Mencetak Surat Kesehatan & Rujukan RS (`/surat`)
 
 Aplikasi menyediakan 3 jenis surat medis resmi:
 
@@ -95,7 +111,7 @@ Aplikasi menyediakan 3 jenis surat medis resmi:
 
 ---
 
-### 💳 Langkah 5: Memproses Pembayaran Kasir & Struk (`/kasir`)
+### 💳 Langkah 6: Memproses Pembayaran Kasir & Struk (`/kasir`)
 
 1. Buka menu **Kasir & Pembayaran** (`/kasir`).
 2. Pilih antrean pasien yang telah selesai diperiksa dokter.
@@ -106,18 +122,18 @@ Aplikasi menyediakan 3 jenis surat medis resmi:
 
 ---
 
-### 📦 Langkah 6: Mengelola Data Obat & Tarif Dokter (`/master`)
+### 📦 Langkah 7: Mengelola Data Obat & Tarif Dokter (`/master`)
 
 - **Master Data Obat (`/master/obat`)**: Menambah obat baru, memperbarui stok, dan mengatur batas minimal stok (*low stock warning*).
 - **Tarif Layanan Dokter (`/master/tarif`)**: Menyesuaikan tarif konsultasi dokter dan prosedur tindakan medis.
 
 ---
 
-### 📲 Penggunaan di Smartphone / HP
+### ⚡ Langkah 8: Menggunakan Tombol ⚡ Reset Demo Data
 
-Saat diakses via HP:
-- Gunakan **Tombol Hamburger (☰)** di kiri atas header untuk membuka menu samping.
-- Atau gunakan **Navigation Bar Bawah** (Dashboard, Antrean, EMR, Surat, Kasir) untuk navigasi instan 1 jempol.
+Jika Anda ingin menguji sistem dari awal atau memamerkan aplikasi kepada pihak lain:
+1. Klik tombol **`⚡ Reset Demo Data`** pada bagian atas Navbar.
+2. Konfirmasi dialog. Sistem akan memuat ulang data dummy antrean, EMR, dan surat medis secara instan dalam 1 detik.
 
 ---
 
